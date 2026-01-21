@@ -1,0 +1,23 @@
+{
+  "name": "deep-origin-assignment",
+  "version": "1.0.0",
+  "description": "API tests based on TypeScript+Playwright to validate DummyJSON. Test task.",
+  "homepage": "https://github.com/gev0201/Deep-Origin-Assignment#readme",
+  "bugs": {
+    "url": "https://github.com/gev0201/Deep-Origin-Assignment/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gev0201/Deep-Origin-Assignment.git"
+  },
+  "license": "ISC",
+  "author": "GevorgGevorgyan",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "tests:api": "playwright test --config=api.config.ts --project=chromium"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.57.0"
+  }
+}
