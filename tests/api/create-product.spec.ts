@@ -1,6 +1,6 @@
 import {test, expect, request} from "@playwright/test";
 import {TEST_PRODUCT_DYNAMIC_DATA, TEST_PRODUCT_STATIC_DATA} from '../../json-models/create-product-payload';
-import {BaseApi} from "../../baseApi/base-api";
+import {BaseApi} from "../../base-api/base-api";
 import {HttpStatuses} from "../../constants/http-statuses";
 import {UPDATED_PRODUCT_STATIC_DATA, UPDATED_PRODUCT_DYNAMIC_DATA} from "../../json-models/update-product-payload";
 
