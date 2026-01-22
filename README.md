@@ -4,9 +4,12 @@ The API test suite implemented with TypeScript and Playwright to check the Dummy
 
 ## 📋 Table of Contents
 
-- [Installation](#installation)
-- [Running Tests](#running-tests)
-- [Viewing Test Results](#viewing-test-results)
+- [Installation](#-installation)
+- [Project Structure](#-project-structure)
+- [Project Design Decision](#-project-design-decision)
+- [Running Tests](#-running-tests)
+- [Viewing Test Results](#-viewing-test-results)
+
 
 ## 🚀 Installation
 
@@ -35,6 +38,72 @@ The API test suite implemented with TypeScript and Playwright to check the Dummy
    ```bash
    npx playwright install
    ```
+   
+## 📁 Project Structure
+
+```
+Deep-Origin-Assignment/
+├── baseApi/                 # BaseApi directory here also can be the Controllers class for each endpoint.
+│   └── base-api.ts          # Base API class for common HTTP methods, can be extended.
+├── constants/               # Constants directory here can be any constants and ENUM for using in whole projects.
+│   └── http-statuses.ts     # HTTP status code constants
+├── helpers/                 # helpers directory can be any helper utilities for using in whole projects.
+│   └── api-helpers.ts       # API helper utilities. This class is empty but it created just for the future to implement helper methods.
+├── json-models/             # Directory for JSON models.
+│   ├── create-product-payload.ts   # Create product request payload model
+│   └── update-product-payload.ts   # Update product request payload model
+├── test-data/               # Directory for test and misc data.
+│   └── misc-data.ts         # Test data > Some test data
+├── tests/                   # Dirctory to place the test files.
+│   └── api/                  # API test. Under tests directory you can create UI or E2E directory for UI tests.
+│       └── crud-product.spec.ts  # Product create, read, update and delete API tests.
+├── test-results/            # Generated test reports (HTML, JSON, XML) - This directory added into .gitignore file.
+|                                it will be created after running tests.
+├── api.config.ts            # Playwright API test configuration
+├── package.json             # Project dependencies
+└── tsconfig.json            # TypeScript configuration
+```
+
+## 🎯 Project Design Decision
+
+Created project is mostly same as a **modular layered architecture** pattern.
+
+### Why This Design?
+
+I decided to use this custom architecture because it is the one of the best practices to write API tests.
+it is very close to **Page Object Model (POM)** pattern and adapted for API testing.
+
+### ✅ Pros
+
+- **Maintainability** - Changes to API endpoints only require updates in one place (baseApi).
+- **Reusability** - Payload models and helpers can be shared across multiple test files.
+- **Scalability/Flexibility** - Easy to add new endpoints, test types (UI/E2E), or data models.
+- **Readability** - Clear separation makes it easy for new team members to understand the codebase.
+- **Principle DRY** - Common logic > reducing code duplication.
+
+## 📋 IMPORTANT
+### In the future we can add Controllers class for each endpoint.
+### I Have not used the Authorization/Authentication for this project. Because it is not required for this project.
+### But it can be implemented easily when it will be required.
+
+### ❌ Cons
+
+- **Initial Overhead** - More boilerplate setup compared to writing tests in a single file
+- **Over-engineering Risk** - For small projects, this structure might be excessive
+- **Learning Curve** - Team members need to understand the architecture before contributing
+
+### ✅ When this architecture is good:
+
+- Any type and capacity of projects > Medium to large test suites with multiple endpoints
+- Teams with multiple contributors.
+- Projects requiring long-term maintenance.
+- Suites that potentially can be expanded to include UI/E2E tests
+
+## 📋 IMPORTANT 
+### For small, single-purpose test scripts, a simple structure can be more appropriate.
+### That's why because this is test task I am not concentrated to huge count of test or some test scripts.
+### I am Just writing simple test scripts.
+### But implemented the framework which can be expanded in the future.
 
 ## 🏃 Running Tests
 
@@ -50,9 +119,6 @@ npm run tests:api
 # Run specific test file
 npx playwright test --config=api.config.ts tests/api/create-product.spec.ts
 ```
-
-[//]: # (TODO: NEED TO ADD PROJECT STRUCTURE)
-[//]: # (TODO: NEED TO ADD DESIGN DECISIONS & TRADEOFFS)
 
 ## 📊 Viewing Test Results
 
@@ -78,7 +144,3 @@ JSON results are saved to:
 
 XML results > For CI/CD integration:
 - `test-results/results.xml`
-
-## 📝 License
-
-ISC License - see LICENSE file for details.

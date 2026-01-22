@@ -1,8 +1,8 @@
 import { PlaywrightTestConfig } from "@playwright/test";
-import { devices } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
     testDir: './tests/api',
+    testMatch: '**/*.spec.ts',
     fullyParallel: true,
     timeout: 50000,
     reporter: [
@@ -16,24 +16,12 @@ const config: PlaywrightTestConfig = {
     },
     use: {
         baseURL: 'https://dummyjson.com',
+        extraHTTPHeaders: {
+            'Content-Type': 'application/json',
+        },
         trace: 'on-first-retry',
         actionTimeout: 10000,
         ignoreHTTPSErrors: true,
     },
-    projects: [
-        {
-            name: 'chromium',
-            use: { ...devices['Desktop Chrome'] },
-        },
-        {
-            name: 'firefox',
-            use: { ...devices['Desktop Firefox'] },
-        },
-        {
-            name: 'webkit',
-            use: { ...devices['Desktop Safari'] },
-        },
-    ],
 };
-
 export default config;

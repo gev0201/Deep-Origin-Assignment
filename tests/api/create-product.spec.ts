@@ -1,28 +1,83 @@
-import { test, expect } from "@playwright/test";
-import { TEST_PRODUCT } from '../../test-data/post-models';
-import { API_BASE_URL } from '../../test-data/test-env-urls';
-import { ApiHelpers } from '../../helpers/api-helpers';
+import {test, expect, request} from "@playwright/test";
+import {TEST_PRODUCT_DYNAMIC_DATA, TEST_PRODUCT_STATIC_DATA} from '../../json-models/create-product-payload';
+import {BaseApi} from "../../baseApi/base-api";
+import {HttpStatuses} from "../../constants/http-statuses";
+import {UPDATED_PRODUCT_STATIC_DATA, UPDATED_PRODUCT_DYNAMIC_DATA} from "../../json-models/update-product-payload";
 
 test.describe('DummyJSON Products API', () => {
+    let baseApi: BaseApi;
 
-    test.describe('CRUD Products', () => {
-        test('Create the product', async ({ request }) => {
-            const response = await request.post(`${API_BASE_URL}/products/add`, {
-                headers: { 'Content-Type': 'application/json' },
-                data: TEST_PRODUCT
-            });
-            
-            await ApiHelpers.validateResponseCode(response, 201);
-            
-            const data = await response.json();
+    test.describe.parallel('CRUD Products', () => {
+        test('Create the product with static data', async ({ request }) => {
+            baseApi = new BaseApi(request);
 
-            expect(data).toHaveProperty('id');
-            expect(data.id).not.toBeNull();
+            const response = await baseApi.postRequest(`/products/add`,
+                TEST_PRODUCT_STATIC_DATA, HttpStatuses.CREATED);
 
-            expect(data.title).toBe(TEST_PRODUCT.title);
-            expect(data.price).toBe(TEST_PRODUCT.price);
-            expect(data.description).toBe(TEST_PRODUCT.description);
+            const responseJson = await response.json();
+
+            expect(responseJson).toHaveProperty('id');
+            expect(responseJson.id).not.toBeNull();
+
+            expect(responseJson.title).toBe(TEST_PRODUCT_STATIC_DATA.title);
+            expect(responseJson.price).toBe(TEST_PRODUCT_STATIC_DATA.price);
+            expect(responseJson.description).toBe(TEST_PRODUCT_STATIC_DATA.description);
         });
 
+        test('Create the product with dynamic data', async ({ request }) => {
+            baseApi = new BaseApi(request);
+
+            const response = await baseApi.postRequest(`/products/add`,
+                TEST_PRODUCT_DYNAMIC_DATA, HttpStatuses.CREATED);
+
+            const responseJson = await response.json();
+
+            expect(responseJson).toHaveProperty('id');
+            expect(responseJson.id).not.toBeNull();
+
+            expect(responseJson.title).toBe(TEST_PRODUCT_DYNAMIC_DATA.title);
+            expect(responseJson.price).toBe(TEST_PRODUCT_DYNAMIC_DATA.price);
+            expect(responseJson.description).toBe(TEST_PRODUCT_DYNAMIC_DATA.description);
+        });
+    });
+
+    test.describe.parallel('Update Products', () => {
+        test('Update the product with static data', async ({ request }) => {
+            baseApi = new BaseApi(request);
+
+            // Getting random product id
+            const getResponse = await baseApi.getRequest(`/products`, HttpStatuses.OK);
+            const getResponseJson = await getResponse.json();
+            const productId = getResponseJson.products[Math.floor(Math.random() * getResponseJson.products.length)].id;
+
+            // Updating the product
+            const response = await baseApi.putRequest(`/products/${productId}`,
+                UPDATED_PRODUCT_STATIC_DATA, HttpStatuses.OK);
+
+            const responseJson = await response.json();
+            expect(responseJson.id).toBe(productId);
+            expect(responseJson.title).toBe(UPDATED_PRODUCT_STATIC_DATA.title);
+            expect(responseJson.price).toBe(UPDATED_PRODUCT_STATIC_DATA.price);
+            expect(responseJson.description).toBe(UPDATED_PRODUCT_STATIC_DATA.description);
+        });
+
+        test('Update the product with dynamic data', async ({request}) => {
+            baseApi = new BaseApi(request);
+
+            // Getting random product id
+            const getResponse = await baseApi.getRequest(`/products`, HttpStatuses.OK);
+            const getResponseJson = await getResponse.json();
+            const productId = getResponseJson.products[Math.floor(Math.random() * getResponseJson.products.length)].id;
+
+            // Updating the product
+            const response = await baseApi.putRequest(`/products/${productId}`,
+                UPDATED_PRODUCT_DYNAMIC_DATA, HttpStatuses.OK);
+
+            const responseJson = await response.json();
+            expect(responseJson.id).toBe(productId);
+            expect(responseJson.title).toBe(UPDATED_PRODUCT_DYNAMIC_DATA.title);
+            expect(responseJson.price).toBe(UPDATED_PRODUCT_DYNAMIC_DATA.price);
+            expect(responseJson.description).toBe(UPDATED_PRODUCT_DYNAMIC_DATA.description);
+        })
     });
 });

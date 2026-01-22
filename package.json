@@ -15,7 +15,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "tests:api": "playwright test --config=api.config.ts --project=chromium"
+    "tests:api": "playwright test --config=api.config.ts"
   },
   "dependencies": {
     "@playwright/test": "^1.57.0"
