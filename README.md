@@ -1,6 +1,8 @@
 # DummyJSON Products API Test Suite
 
-The API test suite implemented with TypeScript and Playwright to check the DummyJSON Products endpoints.
+The API test framework implemented with TypeScript and Playwright
+
+Test suite to check the DummyJSON Products endpoints.
 
 ## 📋 Table of Contents
 
@@ -34,9 +36,13 @@ The API test suite implemented with TypeScript and Playwright to check the Dummy
    ```bash
    npm install -D @playwright/test
    ```
-4. **Install Playwright browsers (Chromium, Firefox, WebKit > FOR UI TESTING)**
+4. **Install Playwright browsers (OPTIONAL:Chromium, Firefox, WebKit > FOR UI TESTING)**
    ```bash
    npx playwright install
+   ```
+5. **Instead of installing all browsers > Step 4 you can just install necessary dependencies by skipping Step 4**
+   ```bash
+   npx playwright install-deps
    ```
    
 ## 📁 Project Structure
@@ -60,13 +66,15 @@ Deep-Origin-Assignment/
 ├── test-results/            # Generated test reports (HTML, JSON, XML) - This directory added into .gitignore file.
 |                                it will be created after running tests.
 ├── api.config.ts            # Playwright API test configuration
-├── package.json             # Project dependencies
-└── tsconfig.json            # TypeScript configuration
+├── package.json             # Project dependencies and configuration
+└── tsconfig.json            # TypeScript configuration file
 ```
 
 ## 🎯 Project Design Decision
 
 Created project is mostly same as a **modular layered architecture** pattern.
+**NOTE**
+Want to mention that there is no 'Controllers' class as in **modular layered architecture** but it can be added easily.
 
 ### Why This Design?
 
@@ -100,10 +108,9 @@ it is very close to **Page Object Model (POM)** pattern and adapted for API test
 - Suites that potentially can be expanded to include UI/E2E tests
 
 ## 📋 IMPORTANT 
-### For small, single-purpose test scripts, a simple structure can be more appropriate.
-### That's why because this is test task I am not concentrated to huge count of test or some test scripts.
-### I am Just writing simple test scripts.
-### But implemented the framework which can be expanded in the future.
+### For small, single-purpose test suites, a simple structure is often the most efficient approach.
+### But, since this is a technical assessment, my focus wasn't on generating a high volume of test cases,
+### but rather on demonstrating a clean, simple, extendable and maintainable implementation.
 
 ## 🏃 Running Tests
 
