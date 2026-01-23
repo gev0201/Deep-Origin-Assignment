@@ -52,9 +52,10 @@ Deep-Origin-Assignment/
 ├── baseApi/                 # BaseApi directory here also can be the Controllers class for each endpoint.
 │   └── base-api.ts          # Base API class for common HTTP methods, can be extended.
 ├── constants/               # Constants directory here can be any constants and ENUM for using in whole projects.
+│                            # Under the constants directory also can be the endpoints which are used in the tests.
 │   └── http-statuses.ts     # HTTP status code constants
 ├── helpers/                 # helpers directory can be any helper utilities for using in whole projects.
-│   └── api-helpers.ts       # API helper utilities. This class is empty but it created just for the future to implement helper methods.
+│   └── api-helpers.ts       # API helper utilities. This class is created to implement helper methods to avoid code duplication.
 ├── json-models/             # Directory for JSON models.
 │   ├── create-product-payload.ts   # Create product request payload model
 │   └── update-product-payload.ts   # Update product request payload model
@@ -62,7 +63,9 @@ Deep-Origin-Assignment/
 │   └── misc-data.ts         # Test data > Some test data
 ├── tests/                   # Dirctory to place the test files.
 │   └── api/                  # API test. Under tests directory you can create UI or E2E directory for UI tests.
-│       └── crud-product.spec.ts  # Product create, read, update and delete API tests.
+│       └── create-product.spec.ts  # Create product API tests.
+│       └── update-products.spec.ts # Update product API tests.
+│       └── delete-products.spec.ts # Delete product API tests.
 ├── test-results/            # Generated test reports (HTML, JSON, XML) - This directory added into .gitignore file.
 |                                it will be created after running tests.
 ├── api.config.ts            # Playwright API test configuration

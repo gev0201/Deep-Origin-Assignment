@@ -11,6 +11,6 @@
     "types": ["node", "@playwright/test"]
   },
   "include": [
-    "tests/**/*"
+    "**/*"
   ]
 }

@@ -1,3 +1,5 @@
+import { RandomUtil } from "../helpers/random-util";
+
 const CATEGORIES = [
     'smartphones',
     'laptops',
@@ -16,16 +18,13 @@ export const TEST_PRODUCT_STATIC_DATA = {
     thumbnail: 'NONE'
 };
 
-// TODO: it will be good to create separate utils method under helpers directory, to generate random data
-
 export const TEST_PRODUCT_DYNAMIC_DATA = {
-    title: `${Math.random().toString(36).substring(2, 10)}`,
-    description: `DESCRIPTION ${Math.random().toString(36).substring(2, 15)}`,
-    price: Math.floor(Math.random() * 10000) + 1000,
-    discountPercentage: Math.floor(Math.random() * 30),
-    rating: Math.floor(Math.random() * 10) + 1,
-    stock: Math.floor(Math.random() * 100) + 1,
-    brand: Math.random().toString(36).substring(2, 8).toUpperCase(),
-    category: CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)],
-    thumbnail: Math.random().toString(36).substring(2, 12)
+    title: `${RandomUtil.generateRandomString(10)}`,
+    description: `DESCRIPTION ${RandomUtil.generateRandomString(15)}`,
+    price: RandomUtil.generateRandomNumber(4),
+    discountPercentage: RandomUtil.generateRandomNumber(2),
+    rating: RandomUtil.generateRandomNumber(1),
+    stock: RandomUtil.generateRandomNumber(2),
+    brand: RandomUtil.generateRandomString(8).toUpperCase(),
+    category: CATEGORIES[RandomUtil.generateRandomNumberInRange(0, CATEGORIES.length - 1)]
 };
