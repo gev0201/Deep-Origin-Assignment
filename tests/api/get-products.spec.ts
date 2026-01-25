@@ -36,7 +36,7 @@ test.describe.parallel('Tests to checkGet Products', () => {
         expect(responseJson.limit).toBe(194);
     });
 
-    test.only('Get products set out of range id', async () => {
+    test('Get products set out of range id', async () => {
         const response = await baseApi.getRequest(`/products/${INVALID_PRODUCT_ID}`, HttpStatuses.NOT_FOUND);
 
         const responseJson = await response.json();
