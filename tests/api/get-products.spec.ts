@@ -1,7 +1,13 @@
 import {expect, test} from "@playwright/test";
 import {BaseApi} from "../../base-api/base-api";
 import {HttpStatuses} from "../../constants/http-statuses";
-import {INVALID_PRODUCT_ID} from "../../test-data/misc-data";
+import {
+    DEFAULT_LIMIT,
+    DEFAULT_SKIP,
+    INVALID_PRODUCT_ID,
+    TOTAL_PRODUCTS,
+    VALID_PRODUCT_ID
+} from "../../test-data/misc-data";
 
 
 test.describe.parallel('Tests to checkGet Products', () => {
@@ -17,10 +23,10 @@ test.describe.parallel('Tests to checkGet Products', () => {
         const responseJson = await response.json();
 
         expect(responseJson).toHaveProperty('products');
-        expect(responseJson.products[0].id).toBe(1);
-        expect(responseJson.total).toBe(194);
-        expect(responseJson.skip).toBe(0);
-        expect(responseJson.limit).toBe(30);
+        expect(responseJson.products[0].id).toBe(VALID_PRODUCT_ID);
+        expect(responseJson.total).toBe(TOTAL_PRODUCTS);
+        expect(responseJson.skip).toBe(DEFAULT_SKIP);
+        expect(responseJson.limit).toBe(DEFAULT_LIMIT);
     });
 
     test('Get products with param limit', async () => {
@@ -29,11 +35,11 @@ test.describe.parallel('Tests to checkGet Products', () => {
         const responseJson = await response.json();
 
         expect(responseJson).toHaveProperty('products');
-        expect(responseJson.products[0].id).toBe(1);
-        expect(responseJson.products[193].id).toBe(194);
-        expect(responseJson.total).toBe(194);
-        expect(responseJson.skip).toBe(0);
-        expect(responseJson.limit).toBe(194);
+        expect(responseJson.products[0].id).toBe(VALID_PRODUCT_ID);
+        expect(responseJson.products[193].id).toBe(TOTAL_PRODUCTS);
+        expect(responseJson.total).toBe(TOTAL_PRODUCTS);
+        expect(responseJson.skip).toBe(DEFAULT_SKIP);
+        expect(responseJson.limit).toBe(TOTAL_PRODUCTS);
     });
 
     test('Get products set out of range id', async () => {
