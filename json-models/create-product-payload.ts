@@ -1,4 +1,4 @@
-import { RandomUtil } from "../helpers/random-util";
+import {RandomUtil} from "../helpers/random-util";
 
 const CATEGORIES = [
     'smartphones',

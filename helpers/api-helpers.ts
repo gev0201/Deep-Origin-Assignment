@@ -9,4 +9,6 @@ export class ApiHelpers {
         return getResponseJson.products[Math.floor(Math.random() * getResponseJson.products.length)].id;
     }
 
+    // TODO: Add other necessary helper methods!
+
 }

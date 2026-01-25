@@ -1,4 +1,3 @@
-
 export class RandomUtil {
 
     static generateRandomString(length: number): string {
@@ -13,5 +12,5 @@ export class RandomUtil {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // TODO add method to generate any random values...
+    // TODO add method to generate any random values!
 }

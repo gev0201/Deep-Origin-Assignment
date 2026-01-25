@@ -10,7 +10,7 @@ test.describe.parallel('Create Products', () => {
         baseApi = new BaseApi(request);
     });
 
-    test('Create the product with static data', async ({ request }) => {
+    test('Create the product with static data', async ({request}) => {
         const response = await baseApi.postRequest(`/products/add`,
             TEST_PRODUCT_STATIC_DATA, HttpStatuses.CREATED);
 
@@ -24,7 +24,7 @@ test.describe.parallel('Create Products', () => {
         expect(responseJson.description).toBe(TEST_PRODUCT_STATIC_DATA.description);
     });
 
-    test('Create the product with dynamic data', async ({ request }) => {
+    test('Create the product with dynamic data', async ({request}) => {
         const response = await baseApi.postRequest(`/products/add`,
             TEST_PRODUCT_DYNAMIC_DATA, HttpStatuses.CREATED);
 
@@ -37,4 +37,6 @@ test.describe.parallel('Create Products', () => {
         expect(responseJson.price).toBe(TEST_PRODUCT_DYNAMIC_DATA.price);
         expect(responseJson.description).toBe(TEST_PRODUCT_DYNAMIC_DATA.description);
     });
+
+    // TODO: Add other necessary tests!
 });

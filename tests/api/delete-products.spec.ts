@@ -13,11 +13,13 @@ test.describe.parallel('Delete Products', () => {
         productId = await ApiHelpers.getRandomProductId(baseApi);
     });
 
-    test('Delete the product', async ({ request }) => {
+    test('Delete the product', async ({request}) => {
         const response = await baseApi.deleteRequest(`/products/${productId}`, HttpStatuses.OK);
         const responseJson = await response.json();
         expect(responseJson.id).toBe(productId);
         expect(responseJson.isDeleted).toBe(true);
         expect(responseJson.deletedOn).toContain(new Date().toISOString().split('T')[0]);
     });
+
+    // TODO: Add other necessary tests!
 });

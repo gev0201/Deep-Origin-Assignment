@@ -13,7 +13,7 @@ test.describe.parallel('Update Products', () => {
         productId = await ApiHelpers.getRandomProductId(baseApi);
     });
 
-    test('Update the product with static data', async ({ request }) => {
+    test('Update the product with static data', async ({request}) => {
         // Updating the product
         const response = await baseApi.putRequest(`/products/${productId}`,
             UPDATED_PRODUCT_STATIC_DATA, HttpStatuses.OK);
@@ -36,4 +36,6 @@ test.describe.parallel('Update Products', () => {
         expect(responseJson.price).toBe(UPDATED_PRODUCT_DYNAMIC_DATA.price);
         expect(responseJson.description).toBe(UPDATED_PRODUCT_DYNAMIC_DATA.description);
     })
+
+    // TODO: Add other necessary tests!
 });

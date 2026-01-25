@@ -1,4 +1,4 @@
-import { RandomUtil } from "../helpers/random-util";
+import {RandomUtil} from "../helpers/random-util";
 
 export const UPDATED_PRODUCT_STATIC_DATA = {
     title: 'KIA Sorento Updated',
