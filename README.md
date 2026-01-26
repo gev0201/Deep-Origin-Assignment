@@ -30,7 +30,7 @@ Test suite to check the DummyJSON Products endpoints.
 
 2. **Install dependencies**
    ```bash
-   npm install
+   npm init
    ```
 3. ** Install Playwright test
    ```bash
